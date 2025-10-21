@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motion Collection - Video Gallery</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .gallery-title {
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            color: #ff0000;
+        }
+        
+        .gallery-subtitle {
+            font-size: 1.25rem;
+            color: #ff6666;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: #ff6666;
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.2s ease;
+            margin-bottom: 2rem;
+        }
+        
+        .back-link:hover {
+            color: #ff0000;
+        }
+        
+        .back-arrow {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .gallery-item {
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid #333333;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+            border-color: #555555;
+            background: rgba(30, 30, 30, 0.9);
+        }
+        
+        .gallery-video {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            object-position: center;
+            background: #000;
+        }
+        
+        .gallery-content {
+            padding: 1.5rem;
+        }
+        
+        .gallery-item-title {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #ff0000;
+        }
+        
+        .gallery-item-description {
+            color: #ff6666;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        
+        .gallery-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .gallery-tag {
+            background: rgba(255, 0, 0, 0.1);
+            color: #ff6666;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 400;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+        }
+        
+        .collection-info {
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid #333333;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .collection-title {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: #ff0000;
+        }
+        
+        .collection-description {
+            color: #ff6666;
+            line-height: 1.7;
+            font-size: 1.125rem;
+        }
+        
+        .video-controls {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 0.5rem;
+            border-radius: 4px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-item:hover .video-controls {
+            opacity: 1;
+        }
+        
+        .play-button {
+            background: #ff0000;
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .play-button:hover {
+            background: #ff3333;
+        }
+        
+        .video-duration {
+            color: #ccc;
+            font-size: 0.875rem;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-container {
+                padding: 1rem;
+            }
+            
+            .gallery-title {
+                font-size: 2.5rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="index.html" class="brand-link">
+                    <img src="Emergence.png" alt="Emergence" class="brand-logo">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html#websites" class="nav-link">Websites</a>
+                <a href="index.html#art" class="nav-link">Art</a>
+                <a href="index.html#about" class="nav-link">About</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="gallery-container">
+            <a href="index.html" class="back-link">
+                <span class="back-arrow">←</span>
+                Back to Portfolio
+            </a>
+            
+            <div class="gallery-header">
+                <h1 class="gallery-title">Motion Collection</h1>
+                <p class="gallery-subtitle">Dynamic video artwork and motion graphics</p>
+            </div>
+            
+            <div class="collection-info">
+                <h2 class="collection-title">About This Collection</h2>
+                <p class="collection-description">
+                    The Motion Collection showcases intense, eye-catching video artwork and motion graphics that demand 
+                    attention through bold visuals and aggressive aesthetics. Each piece combines high-energy design with 
+                    striking visual impact, creating powerful statements that grab viewers instantly. The collection 
+                    features experimental animations, phonk-style motion graphics, and dynamic video content that 
+                    pushes visual boundaries with intense colors, rapid movement, and compelling visual hooks.
+                </p>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <div style="position: relative;">
+                        <video class="gallery-video" autoplay muted loop>
+                            <source src="0514.mov" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-controls">
+                            <button class="play-button" onclick="togglePlay(this)">Play</button>
+                            <span class="video-duration">0:15</span>
+                        </div>
+                    </div>
+                    <div class="gallery-content">
+                        <h3 class="gallery-item-title">Motion Study #0514</h3>
+                        <p class="gallery-item-description">Experimental motion graphics exploring fluid dynamics and abstract forms</p>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Motion Graphics</span>
+                            <span class="gallery-tag">Abstract</span>
+                            <span class="gallery-tag">Experimental</span>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="gallery-item">
+                    <div style="position: relative;">
+                        <video class="gallery-video" autoplay muted loop>
+                            <source src="phonk/0512.mov" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-controls">
+                            <button class="play-button" onclick="togglePlay(this)">Play</button>
+                            <span class="video-duration">0:12</span>
+                        </div>
+                    </div>
+                    <div class="gallery-content">
+                        <h3 class="gallery-item-title">Phonk Motion #0512</h3>
+                        <p class="gallery-item-description">Aggressive phonk-style motion graphics with dark aesthetics</p>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Phonk</span>
+                            <span class="gallery-tag">Dark</span>
+                            <span class="gallery-tag">Music</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div style="position: relative;">
+                        <video class="gallery-video" autoplay muted loop>
+                            <source src="phonk/0513 (1).mov" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-controls">
+                            <button class="play-button" onclick="togglePlay(this)">Play</button>
+                            <span class="video-duration">0:15</span>
+                        </div>
+                    </div>
+                    <div class="gallery-content">
+                        <h3 class="gallery-item-title">Phonk Motion #0513</h3>
+                        <p class="gallery-item-description">Dynamic phonk animation with metallic textures and neon effects</p>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Phonk</span>
+                            <span class="gallery-tag">Metallic</span>
+                            <span class="gallery-tag">Neon</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div style="position: relative;">
+                        <video class="gallery-video" autoplay muted loop>
+                            <source src="phonk/0516 (1).mov" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-controls">
+                            <button class="play-button" onclick="togglePlay(this)">Play</button>
+                            <span class="video-duration">0:18</span>
+                        </div>
+                    </div>
+                    <div class="gallery-content">
+                        <h3 class="gallery-item-title">Phonk Motion #0516</h3>
+                        <p class="gallery-item-description">Intense phonk visual with dripping effects and street art vibes</p>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Phonk</span>
+                            <span class="gallery-tag">Street Art</span>
+                            <span class="gallery-tag">Dripping</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Portfolio. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function togglePlay(button) {
+            const video = button.closest('.gallery-item').querySelector('video');
+            if (video.paused) {
+                video.play();
+                button.textContent = 'Pause';
+            } else {
+                video.pause();
+                button.textContent = 'Play';
+            }
+        }
+        
+        // Auto-pause videos when they're not in view
+        const videos = document.querySelectorAll('video');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.play();
+                } else {
+                    entry.target.pause();
+                }
+            });
+        });
+        
+        videos.forEach(video => {
+            observer.observe(video);
+        });
+    </script>
+</body>
+</html>
