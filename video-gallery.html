@@ -260,7 +260,7 @@
                 <div class="gallery-item">
                     <div style="position: relative;">
                         <video class="gallery-video" autoplay muted loop>
-                            <source src="phonk/0512.mov" type="video/mp4">
+                            <source src="PHONK/0512.mov" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
                         <div class="video-controls">
@@ -282,7 +282,7 @@
                 <div class="gallery-item">
                     <div style="position: relative;">
                         <video class="gallery-video" autoplay muted loop>
-                            <source src="phonk/0513 (1).mov" type="video/mp4">
+                            <source src="PHONK/0513 (1).mov" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
                         <div class="video-controls">
@@ -304,7 +304,7 @@
                 <div class="gallery-item">
                     <div style="position: relative;">
                         <video class="gallery-video" autoplay muted loop>
-                            <source src="phonk/0516 (1).mov" type="video/mp4">
+                            <source src="PHONK/0516 (1).mov" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
                         <div class="video-controls">
@@ -347,7 +347,7 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.play();
+                    entry.target.play().catch(e => console.log('Video play failed:', e));
                 } else {
                     entry.target.pause();
                 }
@@ -356,6 +356,10 @@
         
         videos.forEach(video => {
             observer.observe(video);
+            // Add error handling for video loading
+            video.addEventListener('error', function(e) {
+                console.log('Video error:', e);
+            });
         });
     </script>
 </body>
